@@ -19,7 +19,7 @@ style: |
 # Git Hands-On Training
 
 **Version Control with Git**
-🛠️ Practical Commands | 🤝 Collaboration | 🧠 Troubleshooting
+
 
 ---
 
@@ -29,6 +29,16 @@ style: |
 - Practice staging, committing, branching, and merging
 - Resolve merge conflicts with confidence
 - Learn how to explore Git help and documentation
+
+---
+<!-- _class: follow-along -->
+<!-- _footer: 🟢 Follow Along -->
+
+## Follow Along
+Copy the commands or type them out and practice together
+```bash
+echo Hello World
+```
 
 ---
 
@@ -78,10 +88,10 @@ flowchart LR
 ```
 
 - **Repository**: Project folder with `.git` directory
-- **Branch**: Parallel line of development
-- **Remote**: Git repo hosted online (e.g., GitHub)
-- **Staging**: 
-- **Commit**: Snapshot of changes
+- **Branch**: A copy of the code for making changes safely without affecting others
+- **Remote**: Git repo hosted online (e.g. platforms, GitHub, Azure DevOps, BitBucket)
+- **Staging**: Preparing changes to be included in the next commit
+- **Commit**: A saved version of your code with a message explaining the change
 - **Merge**: Combine changes from one branch into another
 
 ---
@@ -101,6 +111,11 @@ git clone <url>  # Clone an existing repo
 ```
 
 ---
+
+# Fork Training Repo
+
+
+---
 <!-- _class: follow-along -->
 <!-- _footer: 🟢 Follow Along -->
 
@@ -109,7 +124,7 @@ git clone <url>  # Clone an existing repo
 
 Clone the training repository
 ```bash
-git clone https://github.com/Nayak-A/git-training-repo.git
+git clone https://github.com/<your GitHub username>/git-training-repo.git
 ```
 Navigate to the clone repo and opens the directory in VS Code
 
@@ -120,19 +135,32 @@ code .
 
 ---
 
+## Sparse Checkout
+**Partial Cloning**
+Clone with `--filter=blob:none`, this
+> will filter out all blobs (file contents) until needed by Git [_(git-scm)_](https://git-scm.com/docs/git-clone#Documentation/git-clone.txt---filterfilter-spec)
+```bash
+git clone --filter=blob:none <url>
+```
+
+**Sparse Checkouts**
+Filter the checkouts to just specified directories
+```bash
+git sparse-checkout set [dir1]
+```
+
+---
+
 ## Branching
 
 ```bash
 git branch
 ```
 ```bash
-git switch <branch>
+git switch <branch> # git checkout <branch>
 ```
 ```bash
-git switch -c <branch>
-```
-```bash
-git merge <branch>
+git switch -c <branch> # git checkout -b <branch>
 ```
 
 🌿 Use branches to develop features independently
@@ -145,7 +173,7 @@ git merge <branch>
 
 Create a branch to make changes in
 ```bash
-git checkout -b your-branch-name
+git switch -c test/feature_branch_1
 ```
 
 ---
@@ -173,11 +201,11 @@ git push
 
 Push your branch to remote
 ```bash
-git push origin your-branch-name
+git push
 ```
-Git is very helpful when we go wrong, try adding `-u` or `--set-upstream` after `push`
+Git doesn't know which remote repository to push to
 ```bash
-git push --set-upstream origin your-branch-name
+git push --set-upstream origin test/feature_branch_1
 ```
 
 ---
@@ -202,10 +230,9 @@ git push
 
 ## Stage, Commit, and Push Changes
 
-Open `src.txt` and add a line to the end, or simply run
-```bash
-echo Random %RANDOM% %DATE% %TIME% >> src.txt
-```
+Open `src.txt` and add a line to the end
+
+
 Next, we'll stage our changes
 ```bash
 git status 
@@ -226,9 +253,9 @@ We don't need to specify remote or which branch, since we are already tracking
 ## Merging Branches
 
 ```bash
-git switch main
+git switch <branch to pull changes into>
 git pull
-git merge your-branch-name
+git merge <branch to pull changes from>
 ```
 
 ➡️ If there are no conflicts, it merges cleanly
@@ -247,11 +274,36 @@ This is your branch.
 ```
 
 ✅ Keep what you want\
-✅ Delete conflict markers\
-✅ Then:
+✅ Delete conflict markers, and then
 
 ```bash
 git add <filename>
+git commit
+```
+
+Want to deal with it later?
+```bash
+git merge --abort
+```
+
+---
+<!-- _class: follow-along -->
+<!-- _footer: 🟢 Follow Along -->
+
+## Resolving Merge Conflicts
+
+Let's simulate a merge conflict by making changes to main
+```bash
+.\scripts\simulate_changes_to_main.bat
+```
+This made some changes to the main branch that will now conflict with our changes
+```bash
+git merge main
+```
+
+Once resolved
+```bash
+git add src.txt
 git commit
 ```
 
@@ -304,14 +356,6 @@ git reflog
 
 ---
 
-## Final Challenge
-
-✅ Create a new branch\
-✅ Make a change\
-✅ Merge back to `main` (resolve any conflict!)
-
----
-
 ## Thanks & Resources
 
 - [Pro Git Book](https://git-scm.com/book)
@@ -322,3 +366,4 @@ git reflog
 
 🙋 Final Q&A
 ---
+
