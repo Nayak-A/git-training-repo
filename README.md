@@ -309,6 +309,20 @@ git commit
 
 ---
 
+## Undoing Mistakes
+
+```bash
+git restore <file>
+git reset --soft HEAD~1
+git reset --hard HEAD~1
+git revert <commit>
+git reflog
+```
+
+🧹 Undo changes safely
+
+---
+
 ## Stashing
 
 Save current changes for later
@@ -321,20 +335,6 @@ git stash pop
 ```
 
 🧳 Save temporary changes without committing
-
----
-
-## Undoing Mistakes
-
-```bash
-git restore <file>
-git reset --soft HEAD~1
-git reset --hard HEAD~1
-git revert <commit>
-git reflog
-```
-
-🧹 Undo changes safely
 
 ---
 
